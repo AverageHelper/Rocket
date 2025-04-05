@@ -116,6 +116,7 @@ fn additional_headers_test() {
     let shield = Shield::default()
         .enable(Hsts::default())
         .enable(ExpectCt::default())
+        .enable(OriginCluster::default())
         .enable(Referrer::default());
 
     dispatch!(shield, |response: LocalResponse<'_>| {
@@ -130,6 +131,8 @@ fn additional_headers_test() {
             "Expect-CT",
             format!("max-age={}, enforce", Duration::days(30).whole_seconds())
         );
+
+        assert_header!(response, "Origin-Agent-Cluster", "?1");
 
         assert_header!(response, "Referrer-Policy", "no-referrer");
     })

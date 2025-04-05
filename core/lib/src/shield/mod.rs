@@ -10,16 +10,17 @@
 //!
 //! # Supported Headers
 //!
-//! | HTTP Header                 | Description                            | Policy         | Default? |
-//! | --------------------------- | -------------------------------------- | -------------- | -------- |
-//! | [X-XSS-Protection]          | Prevents some reflected XSS attacks.   | [`XssFilter`]  | ✗        |
-//! | [X-Content-Type-Options]    | Prevents client sniffing of MIME type. | [`NoSniff`]    | ✔        |
-//! | [X-Frame-Options]           | Prevents [clickjacking].               | [`Frame`]      | ✔        |
-//! | [Strict-Transport-Security] | Enforces strict use of HTTPS.          | [`Hsts`]       | ?        |
-//! | [Expect-CT]                 | Enables certificate transparency.      | [`ExpectCt`]   | ✗        |
-//! | [Referrer-Policy]           | Enables referrer policy.               | [`Referrer`]   | ✗        |
-//! | [X-DNS-Prefetch-Control]    | Controls browser DNS prefetching.      | [`Prefetch`]   | ✗        |
-//! | [Permissions-Policy]        | Allows or block browser features.      | [`Permission`] | ✔        |
+//! | HTTP Header                 | Description                            | Policy            | Default? |
+//! | --------------------------- | -------------------------------------- | ----------------- | -------- |
+//! | [X-XSS-Protection]          | Prevents some reflected XSS attacks.   | [`XssFilter`]     | ✗        |
+//! | [X-Content-Type-Options]    | Prevents client sniffing of MIME type. | [`NoSniff`]       | ✔        |
+//! | [X-Frame-Options]           | Prevents [clickjacking].               | [`Frame`]         | ✔        |
+//! | [Strict-Transport-Security] | Enforces strict use of HTTPS.          | [`Hsts`]          | ?        |
+//! | [Expect-CT]                 | Enables certificate transparency.      | [`ExpectCt`]      | ✗        |
+//! | [Referrer-Policy]           | Enables referrer policy.               | [`Referrer`]      | ✗        |
+//! | [X-DNS-Prefetch-Control]    | Controls browser DNS prefetching.      | [`Prefetch`]      | ✗        |
+//! | [Origin-Agent-Cluster]      | Disables resource sharing.             | [`OriginCluster`] | ✗        |
+//! | [Permissions-Policy]        | Allows or block browser features.      | [`Permission`]    | ✔        |
 //!
 //! <small>? If TLS is enabled in a non-debug profile, HSTS is automatically
 //! enabled with its default policy and a warning is logged at liftoff.</small>
@@ -31,6 +32,7 @@
 //! [Expect-CT]:  https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expect-CT
 //! [Referrer-Policy]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
 //! [X-DNS-Prefetch-Control]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-DNS-Prefetch-Control
+//! [Origin-Agent-Cluster]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Origin-Agent-Cluster
 //! [clickjacking]: https://en.wikipedia.org/wiki/Clickjacking
 //! [Permissions-Policy]: https://github.com/w3c/webappsec-permissions-policy/blob/a45df7b237e2a85e1909d7f226ca4eb4ce5095ba/permissions-policy-explainer.md
 //!
@@ -41,6 +43,7 @@
 //! [`ExpectCt`]: self::ExpectCt
 //! [`Referrer`]: self::Referrer
 //! [`Prefetch`]: self::Prefetch
+//! [`OriginCluster`]: self::OriginCluster
 //!
 //! # Usage
 //!

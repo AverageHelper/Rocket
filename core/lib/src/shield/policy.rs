@@ -83,6 +83,7 @@ impl_policy!(Hsts, "Strict-Transport-Security");
 impl_policy!(ExpectCt, "Expect-CT");
 impl_policy!(Referrer, "Referrer-Policy");
 impl_policy!(Prefetch, "X-DNS-Prefetch-Control");
+impl_policy!(OriginCluster, "Origin-Agent-Cluster");
 impl_policy!(Permission, "Permissions-Policy");
 
 /// The [Referrer-Policy] header: controls the value set by the browser for the
@@ -237,6 +238,32 @@ impl Default for NoSniff {
 impl From<&NoSniff> for Header<'static> {
     fn from(_: &NoSniff) -> Self {
         Header::new(NoSniff::NAME, "nosniff")
+    }
+}
+
+/// The [Origin-Agent-Cluster] header: controls browser resource sharing.
+///
+/// Tells the browser that operating system resources used to evaluate the
+/// document should be shared only with other documents from the same origin.
+///
+/// [Origin-Agent-Cluster]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Origin-Agent-Cluster
+pub enum OriginCluster {
+    /// Request that the document be placed in an origin-keyed [agent cluster].
+    /// 
+    /// [agent cluster]: https://tc39.es/ecma262/#sec-agent-clusters
+    Enable,
+}
+
+/// Defaults to [`OriginCluster::Enable`], turns off resource sharing.
+impl Default for OriginCluster {
+    fn default() -> Self {
+        OriginCluster::Enable
+    }
+}
+
+impl From<&OriginCluster> for Header<'static> {
+    fn from(_: &OriginCluster) -> Self {
+        Header::new(OriginCluster::NAME, "?1")
     }
 }
 
